@@ -4,3 +4,51 @@
  * This is a general purpose Gradle build.
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.3.3/samples
  */
+ 
+/* CRT: okay -- explain why, and I'll do it ;) */
+/*
+import com.progress.gradle.abl.tasks.*
+*/ 
+
+plugins {
+    id 'base'              // Gives base tasks like build, assemble, check, clean...
+    //id "org.sonarqube"  // Sonar support
+ 
+    id "com.dorongold.task-tree" version "2.1.0" // provides 'taskTree' task, which prints out task dependency trees
+    //https://github.com/dorongold/gradle-task-tree
+    
+    id "progress.openedge.abl-base"
+}
+ 
+task myCompileTask(type: ABLCompile){
+    println "OE version: ${openedgeVersion}"
+    
+    avmOptions {
+        tty.enabled = 'true'
+    }
+    
+    compileOptions {
+    
+        // if we're not producing debug code
+        minSize.enabled = 'true'
+        
+        // helpful to identify r-code (specifically with Webclient)
+        // GENERATE-MD5='true'
+        
+        strictOptions {
+            requireFullNames="Error"
+            requireFieldQualifiers="Error"
+            requireFullKeywords="Ignore"
+            requireReturnValues="Ignore"
+        }
+    }
+    
+    // "baseade" PL files will already be inclued
+    propath("src","${abl.dlcHome}/tty/netlib/OpenEdge.Net.pl")
+    
+    source("src")
+    include("**/*.p","**/*.cls")
+    rcodeDir="bin"
+}
+
+check.dependsOn myCompileTask

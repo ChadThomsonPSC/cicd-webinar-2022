@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module-content version="12.2">
+    <module id="0f01d5d4-b6ef-49fe-924d-94f3cdafe6e1" name="cicd-web">
+        <resource path="src" publish="true"/>
+    </module>
+</module-content>

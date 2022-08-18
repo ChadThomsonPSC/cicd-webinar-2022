@@ -4,22 +4,36 @@
  * This is a general purpose Gradle build.
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.3.3/samples
  */
- 
-/* CRT: okay -- explain why, and I'll do it ;) */
 /*
+ *  see also:
+ *     https://docs.gradle.org/7.3.3/userguide/userguide.html
+ *     https://docs.gradle.org/7.3.3/dsl/index.html
+ */ 
+
 import com.progress.gradle.abl.tasks.*
-*/ 
 
 plugins {
     id 'base'              // Gives base tasks like build, assemble, check, clean...
-    //id "org.sonarqube"  // Sonar support
- 
+    //id "org.sonarqube"   // Sonar support
+    
+    id 'distribution'      // for zip creation, etc.
+    //https://docs.gradle.org/7.3.3/userguide/distribution_plugin.html#distribution_plugin
+    
     id "com.dorongold.task-tree" version "2.1.0" // provides 'taskTree' task, which prints out task dependency trees
     //https://github.com/dorongold/gradle-task-tree
     
     id "progress.openedge.abl-base"
 }
- 
+
+/*
+use:
+   println <variable> to 'debug' build configuration
+        - println "message ${variable}"
+        - println buildDir
+        - println abl.openedgeVersion
+*/
+
+// https://docs.progress.com/bundle/openedge-devops-framework/page/ABLCompile.html
 task myCompileTask(type: ABLCompile){
     println "OE version: ${openedgeVersion}"
     
@@ -51,4 +65,45 @@ task myCompileTask(type: ABLCompile){
     rcodeDir="bin"
 }
 
-check.dependsOn myCompileTask
+// https://docs.progress.com/bundle/openedge-devops-framework/page/ABLUnit.html
+task testCases (type: ABLUnit){
+    dependsOn myCompileTask
+    
+    // CRT: should the testcases be compiled, too?
+    // TODO: make a testcasecompile ablcompile task
+    
+    avmOptions {
+        tty.enabled = true
+    }
+    
+    arguments = [ 
+        failOnError : true, 
+        haltOnFailure: true 
+    ]
+        
+    // include() - procedures and classes to include in the 'run'
+    // exclude() - procedures and classes to exclude from the 'run'
+    include("**/*.p","**/*.cls")
+
+    // source()  - folder where source code is located, applied after include/exclude
+    source("tests")
+    
+    
+    // "baseade" PL files will already be inclued
+    propath("tests", "src", "${abl.dlcHome}/tty/netlib/OpenEdge.Net.pl")
+    
+    // set wrkDir: for logging output
+    wrkDir = "tests"
+    
+    // outputDir : where the results.xml will be
+    outputDir = "tests"
+    
+    /*
+    outputs.upToDateWhen {
+        false
+    }
+    */
+}
+
+check.dependsOn testCases
+assemble.dependsOn myCompileTask

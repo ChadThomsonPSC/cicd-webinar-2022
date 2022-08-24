@@ -29,22 +29,22 @@ assign
    
 mainblock:
 do on error undo, throw:
-    Logger:Info(substitute('Starting')).
+    Logger:Info('Starting').
 
     Assert:NotNullOrEmpty(pcHelloName, 'HelloName').
     
     assign
-        pcOutMessage = subst('Hello &1',pcHelloName).
+        pcOutMessage = substitute('Hello &1',pcHelloName).
             
     catch er as Progress.Lang.Error :
         /* catch, log, and rethrow */
-        Logger:Error(substitute('Error',er)).
+        Logger:Error('Error',er).
         
         undo, throw er.            
     end catch.
 end. /* mainblock */
 
 finally:
-    Logger:info(substitute('Done')).
+    Logger:info('Done').
 end finally.
 /* EOF */

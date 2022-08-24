@@ -3,3 +3,11 @@
 
 # Ignore Gradle build output directory
 build
+
+# generated output
+bin
+temp
+
+# Eclipse project files
+.classpath
+.project

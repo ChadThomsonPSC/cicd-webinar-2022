@@ -19,10 +19,13 @@ plugins {
     id 'distribution'      // for zip creation, etc.
     //https://docs.gradle.org/7.3.3/userguide/distribution_plugin.html#distribution_plugin
     
-    id "com.dorongold.task-tree" version "2.1.0" // provides 'taskTree' task, which prints out task dependency trees
+    id "com.dorongold.task-tree" // provides 'taskTree' task, which prints out task dependency trees
     //https://github.com/dorongold/gradle-task-tree
     
-    id "progress.openedge.abl-base"
+    id "progress.openedge.abl-base" // base ABL compilation tasks
+    
+    id "progress.openedge.abl"      // link with PDSOE
+    
 }
 
 /*
@@ -34,7 +37,10 @@ use:
 */
 
 // https://docs.progress.com/bundle/openedge-devops-framework/page/ABLCompile.html
-task myCompileTask(type: ABLCompile){
+tasks.register("myABLCompile",ABLCompile){
+    description "My Compile ABL"
+     group "ablbase"
+    
     println "OE version: ${openedgeVersion}"
     
     avmOptions {
@@ -66,8 +72,11 @@ task myCompileTask(type: ABLCompile){
 }
 
 // https://docs.progress.com/bundle/openedge-devops-framework/page/ABLUnit.html
-task testCases (type: ABLUnit){
-    dependsOn myCompileTask
+tasks.register("myTestCases", ABLUnit){
+    description "My ABL Unit Test Cases"
+    group "ablbase"
+    
+    dependsOn myABLCompile
     
     // CRT: should the testcases be compiled, too?
     // TODO: make a testcasecompile ablcompile task
@@ -105,5 +114,5 @@ task testCases (type: ABLUnit){
     */
 }
 
-check.dependsOn testCases
-assemble.dependsOn myCompileTask
+check.dependsOn myTestCases
+assemble.dependsOn myABLCompile

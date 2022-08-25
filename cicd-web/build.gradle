@@ -78,7 +78,6 @@ tasks.register("myTestCases", ABLUnit){
     
     dependsOn myABLCompile
     
-    // CRT: should the testcases be compiled, too?
     // TODO: make a testcasecompile ablcompile task
     
     avmOptions {
@@ -97,7 +96,6 @@ tasks.register("myTestCases", ABLUnit){
     // source()  - folder where source code is located, applied after include/exclude
     source("tests")
     
-    
     // "baseade" PL files will already be inclued
     propath("tests", "src", "${abl.dlcHome}/tty/netlib/OpenEdge.Net.pl")
     
@@ -114,5 +112,5 @@ tasks.register("myTestCases", ABLUnit){
     */
 }
 
-check.dependsOn myTestCases
-assemble.dependsOn myABLCompile
+//check.dependsOn myTestCases
+//assemble.dependsOn myABLCompile

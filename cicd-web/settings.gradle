@@ -6,12 +6,21 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/7.3.3/userguide/multi_project_builds.html
  */
+/*
+ * Note: move this file to the root of the build when multiple projects are present.
+ *      included the projects in this file
+ *      include("<subproject-folder>)
+ */
 
 pluginManagement {
     plugins {
-        id "progress.openedge.abl-base" version "2.1.0"
-        id "org.sonarqube" version "3.0" 
+        id "progress.openedge.abl-base" version "${pluginVersionABLBase}"
+        id "org.sonarqube" version "${pluginVersionSonarqube}" 
+        id "com.dorongold.task-tree" version "${pluginVersionTasktree}"
+        id "progress.openedge.abl" version "${pluginVersionABL}"
     }
 }
 
 rootProject.name = 'cicd-web'
+
+//println 'This is executed during the initialization phase. <see: settings.gradle>'

@@ -2,7 +2,6 @@
 !! This repository is strictly for demonstration purposes. It does not necessarily represent a complete solution or "best-practices". !!
 
 There will be updates in the near future, and pull requests are encouraged if you'd like to suggest updates.
-Progress Application Server (PAS) for OpenEdge (PASOE) Migration Webinar Presentation and Examples
 
 Originally presented on August 25, 2022.
 

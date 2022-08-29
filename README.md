@@ -7,6 +7,6 @@ Originally presented on August 25, 2022.
 
 # Presentation Slides
 The webinar materials are available:
-- [View Slide Presentation](chadthomsonpsc.github.io/cicd-webinar-2022)
+- [View Slide Presentation](https://chadthomsonpsc.github.io/cicd-webinar-2022)
 - [Access Slides](presentation/slides)
 - [PDF](presentation/GettingOpenEdgeCICDReady_Aug2022.pdf) 

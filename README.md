@@ -6,7 +6,7 @@ There will be updates in the near future, and pull requests are encouraged if yo
 Originally presented on August 25, 2022.
 
 # Q/A
-Questions and Answers presented during the original presentation are being [discussed](/discussions).
+Questions and Answers presented during the original presentation are being [discussed](https://github.com/ChadThomsonPSC/cicd-webinar-2022/discussions). Join in!
 
 # Presentation Slides
 The webinar materials are available:

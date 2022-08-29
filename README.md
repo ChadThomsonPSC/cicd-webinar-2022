@@ -6,10 +6,9 @@ There will be updates in the near future, and pull requests are encouraged if yo
 Originally presented on August 25, 2022.
 
 # Q/A
-Questions and Answers presented during the original presentation are being [discussed](https://github.com/ChadThomsonPSC/cicd-webinar-2022/discussions). Join in!
+Questions and Answers presented during the original webinar are being [discussed](https://github.com/ChadThomsonPSC/cicd-webinar-2022/discussions). Join in!
 
 # Presentation Slides
 The webinar materials are available:
 - [View Slide Presentation](https://chadthomsonpsc.github.io/cicd-webinar-2022)
-- [Access Slides](presentation/slides)
-- [PDF](presentation/GettingOpenEdgeCICDReady_Aug2022.pdf) 
+- [PDF](https://github.com/ChadThomsonPSC/cicd-webinar-2022/blob/d9cea07a9afab4016c8f376ecef65fa34bcdf042/presentation/GettingOpenEdgeCICDReady_Aug2022.pdf) 
